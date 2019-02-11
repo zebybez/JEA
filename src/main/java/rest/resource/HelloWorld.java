@@ -1,4 +1,4 @@
-package resource;
+package rest.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +9,6 @@ public class HelloWorld {
     @GET
     @Produces("text/plain")
     public String hello(){
-        return "hello from the resource layer";
+        return "hello from the rest.resource layer";
     }
 }
