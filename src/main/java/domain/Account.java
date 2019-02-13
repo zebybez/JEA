@@ -1,9 +1,10 @@
 package domain;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
-public class Account {
+public class Account implements Serializable {
 
     private String uuid;
 

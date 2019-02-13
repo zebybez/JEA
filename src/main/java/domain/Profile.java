@@ -11,16 +11,22 @@ public class Profile {
     private List<Subreddit> subcriberOf;
     private List<Post> posts;
     private List<Comment> comments;
-
-    private Profile() {
+    public Profile() {
     }
-
     public Profile(int karmaPoints, List<Subreddit> moderatorOf, List<Subreddit> subcriberOf, List<Post> posts, List<Comment> comments) {
         this.karmaPoints = karmaPoints;
         this.moderatorOf = moderatorOf;
         this.subcriberOf = subcriberOf;
         this.posts = posts;
         this.comments = comments;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public int getKarmaPoints() {
