@@ -9,7 +9,7 @@ public class Comment implements Judgeable {
     private String uuid;
     private int upvotes;
     private int downvotes;
-    private User creator;
+    private Profile creator;
     private Judgeable parent;
 
     public String getUuid() {
@@ -24,7 +24,7 @@ public class Comment implements Judgeable {
 
     }
 
-    public Comment(String uuid, int upvotes, int downvotes, User creator, Judgeable parent) {
+    public Comment(String uuid, int upvotes, int downvotes, Profile creator, Judgeable parent) {
         this.uuid = uuid;
         this.upvotes = upvotes;
         this.downvotes = downvotes;
@@ -43,7 +43,7 @@ public class Comment implements Judgeable {
     }
 
     @Override
-    public User getCreator() {
+    public Profile getCreator() {
         return creator;
     }
 

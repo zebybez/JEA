@@ -1,23 +1,22 @@
 package domain;
 
 import javax.persistence.Entity;
-import java.util.UUID;
 
 @Entity
 public class Account {
 
     private String uuid;
 
-    private User user;
+    private Profile profile;
     private String email;
     private String passwordHash;
 
     public Account() {
     }
 
-    public Account(String uuid, User user, String email, String passwordHash) {
+    public Account(String uuid, Profile profile, String email, String passwordHash) {
         this.uuid = uuid;
-        this.user = user;
+        this.profile = profile;
         this.email = email;
         this.passwordHash = passwordHash;
     }
@@ -30,12 +29,12 @@ public class Account {
         this.uuid = uuid;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public String getEmail() {

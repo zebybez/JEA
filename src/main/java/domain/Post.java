@@ -6,7 +6,7 @@ public class Post implements Judgeable {
 
     private int upvotes;
     private int downvotes;
-    private User creator;
+    private Profile creator;
     private String title;
     private String content;
     private Subreddit subreddit;
@@ -24,7 +24,7 @@ public class Post implements Judgeable {
     }
 
     @Override
-    public User getCreator() {
+    public Profile getCreator() {
         return creator;
     }
 

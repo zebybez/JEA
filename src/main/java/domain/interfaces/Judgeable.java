@@ -1,11 +1,11 @@
 package domain.interfaces;
 
-import domain.User;
+import domain.Profile;
 
 public interface Judgeable {
    int getUpvotes();
    int getDownvotes();
-   User getCreator();
+   Profile getCreator();
 
     /***
      * calculates the score of the item using the up and down-votes

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
-public class User {
+public class Profile {
     private String uuid;
     private int karmaPoints;
     private List<Subreddit> moderatorOf;
@@ -12,10 +12,10 @@ public class User {
     private List<Post> posts;
     private List<Comment> comments;
 
-    private User() {
+    private Profile() {
     }
 
-    public User(int karmaPoints, List<Subreddit> moderatorOf, List<Subreddit> subcriberOf, List<Post> posts, List<Comment> comments) {
+    public Profile(int karmaPoints, List<Subreddit> moderatorOf, List<Subreddit> subcriberOf, List<Post> posts, List<Comment> comments) {
         this.karmaPoints = karmaPoints;
         this.moderatorOf = moderatorOf;
         this.subcriberOf = subcriberOf;
