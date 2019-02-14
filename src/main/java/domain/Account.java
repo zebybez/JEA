@@ -11,6 +11,7 @@ public class Account implements Serializable {
     private Profile profile;
     private String email;
     private String passwordHash;
+    private String salt;
 
     public Account() {
     }
@@ -20,6 +21,14 @@ public class Account implements Serializable {
         this.profile = profile;
         this.email = email;
         this.passwordHash = passwordHash;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getUuid() {

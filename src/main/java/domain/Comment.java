@@ -20,7 +20,7 @@ public class Comment implements Judgeable {
         return parent;
     }
 
-    private Comment() {
+    public Comment() {
 
     }
 
