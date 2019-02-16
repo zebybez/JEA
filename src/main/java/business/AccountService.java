@@ -41,6 +41,6 @@ public class AccountService {
         account.setSalt(salt);
         account.setPasswordHash(hashUtil.hashString(salt, password));
 
-        return accountDao.saveAccount(account);
+        return accountDao.addAccount(account);
     }
 }
