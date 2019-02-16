@@ -13,6 +13,9 @@ src/test/
 # BlueJ files
 *.ctxt
 
+# XML files
+*.xml
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -54,3 +57,9 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+
+
+.idea/JEA.iml
+.idea/modules.xml
+!/src/main/java/data/persistence.xml
