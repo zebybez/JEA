@@ -1,13 +1,19 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Entity
 public class Account implements Serializable {
-
+    @Id
     private String uuid;
 
+    @OneToOne
+    @JsonIgnore
     private Profile profile;
     private String email;
     private String passwordHash;
