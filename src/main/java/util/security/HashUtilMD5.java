@@ -2,6 +2,9 @@ package util.security;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.ejb.Stateless;
+
+@Stateless
 public class HashUtilMD5 implements HashUtil {
     @Override
     public String generateSalt() {

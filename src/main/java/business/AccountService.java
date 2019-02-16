@@ -24,7 +24,7 @@ public class AccountService {
     }
 
     @Inject
-    public void setHashUtil(HashUtilMD5 hashUtil) {
+    public void setHashUtil(HashUtil hashUtil) {
         this.hashUtil = hashUtil;
     }
 
