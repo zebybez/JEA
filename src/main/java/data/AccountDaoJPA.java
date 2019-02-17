@@ -24,7 +24,6 @@ public class AccountDaoJPA implements AccountDao {
     @Override
     public Account saveAccount(Account account) {
         em.persist(account);
-        em.flush();
         return account;
     }
 

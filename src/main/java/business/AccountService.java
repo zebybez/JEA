@@ -53,7 +53,6 @@ public class AccountService {
 
         profile.setName(name);
         account.setProfile(profile);
-        profileDao.saveProfile(profile);
         return accountDao.saveAccount(account);
     }
 }
