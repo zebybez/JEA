@@ -6,22 +6,36 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "Post")
 public class Post implements Judgeable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String uuid;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Subreddit subreddit;
     @ManyToOne
     private Profile creator;
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
-
     private int upvotes;
     private int downvotes;
     private String title;
     private String content;
     private boolean isNSFW;
+
+    public Post(){
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUuid() {
         return uuid;

@@ -7,33 +7,38 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "subreddits", schema = "SUBREDDITS")
+@Table(name = "Subreddit")
 public class Subreddit {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String uuid;
-    @ManyToMany(mappedBy = "moderatorOf")
-    @JsonIgnore
+    @ManyToMany(mappedBy = "moderatorOf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Profile> moderators;
-    @ManyToMany(mappedBy = "subscriberOf")
-    @JsonIgnore
+    @ManyToMany(mappedBy = "subscriberOf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Profile> subscribers;
     @OneToMany(mappedBy = "subreddit")
-    @JsonIgnore
     private List<Post> posts;
     @ManyToOne
     private Profile creator;
     private String rules;
-
     public Subreddit() {
 
     }
-
     public Subreddit(String uuid, List<Post> posts, List<Profile> moderators, List<Profile> subscribers, String rules) {
         this.uuid = uuid;
         this.posts = posts;
         this.moderators = moderators;
         this.subscribers = subscribers;
         this.rules = rules;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Profile getCreator() {

@@ -1,10 +1,11 @@
 package business;
 
+import data.ProfileDao;
 import data.interfaces.AccountDao;
 import domain.Account;
+import domain.Profile;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import util.security.HashUtil;
-import util.security.HashUtilMD5;
 import util.security.Payload;
 
 import javax.ejb.Stateless;
@@ -12,8 +13,10 @@ import javax.inject.Inject;
 
 @Stateless
 public class AccountService {
-    HashUtil hashUtil;
-    AccountDao accountDao;
+    private HashUtil hashUtil;
+    private AccountDao accountDao;
+    private ProfileDao profileDao;
+
 
     public AccountService() {
     }
@@ -21,6 +24,11 @@ public class AccountService {
     @Inject
     public void setAccountDao(AccountDao accountDao) {
         this.accountDao = accountDao;
+    }
+
+    @Inject
+    public void setProfileDao(ProfileDao profileDao){
+        this.profileDao = profileDao;
     }
 
     @Inject
@@ -33,7 +41,7 @@ public class AccountService {
         throw new NotImplementedException();
     }
 
-    public Account addNewAccount(String email, String password) {
+    public Account addNewAccount(String email, String name, String password) {
         Account account = new Account();
 
         account.setEmail(email);
@@ -41,6 +49,11 @@ public class AccountService {
         account.setSalt(salt);
         account.setPasswordHash(hashUtil.hashString(salt, password));
 
-        return accountDao.addAccount(account);
+        Profile profile = new Profile();
+
+        profile.setName(name);
+        account.setProfile(profile);
+        profileDao.saveProfile(profile);
+        return accountDao.saveAccount(account);
     }
 }

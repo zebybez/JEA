@@ -1,38 +1,30 @@
 package domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "Profile")
 public class Profile {
     @Id
-    private long id;
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String uuid = UUID.randomUUID().toString();
+    private String name;
     private int karmaPoints;
-
-    @OneToMany(mappedBy = "creator")
-    @JsonIgnore
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> posts;
-    @OneToMany(mappedBy = "creator")
-    @JsonIgnore
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
-    @OneToMany(mappedBy = "creator")
-    @JsonIgnore
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Subreddit> ownerOf;
-    @ManyToMany
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Subreddit> moderatorOf;
-    @ManyToMany
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Subreddit> subscriberOf;
-
     public Profile() {
     }
-
     public Profile(int karmaPoints, List<Subreddit> moderatorOf, List<Subreddit> subscriberOf, List<Post> posts, List<Comment> comments) {
         this.karmaPoints = karmaPoints;
         this.moderatorOf = moderatorOf;
@@ -41,8 +33,20 @@ public class Profile {
         this.comments = comments;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setId(long id) {

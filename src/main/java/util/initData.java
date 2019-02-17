@@ -3,21 +3,19 @@ package util;
 import business.AccountService;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.ejb.Singleton;
 
 @Singleton
+@Startup
 public class initData {
-    private AccountService accountService;
-
     @Inject
-    public void setAccountService(AccountService accountService){
-        this.accountService = accountService;
-    }
+    private AccountService accountService;
 
     @PostConstruct
     public void createUsers(){
-        accountService.addNewAccount("peter@test.com", "peter");
-        accountService.addNewAccount("henk@test.com", "henk");
+        accountService.addNewAccount("peter@test.com", "peter", "peter");
+        accountService.addNewAccount("henk@test.com", "henk", "henk");
     }
 }
