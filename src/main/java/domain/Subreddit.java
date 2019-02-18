@@ -22,15 +22,25 @@ public class Subreddit {
     @ManyToOne
     private Profile creator;
     private String rules;
+    @Column(unique = true)
+    private String name;
+
     public Subreddit() {
 
     }
-    public Subreddit(String uuid, List<Post> posts, List<Profile> moderators, List<Profile> subscribers, String rules) {
+
+    public Subreddit(String uuid, String name, String rules) {
         this.uuid = uuid;
-        this.posts = posts;
-        this.moderators = moderators;
-        this.subscribers = subscribers;
+        this.name = name;
         this.rules = rules;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {

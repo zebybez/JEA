@@ -41,7 +41,7 @@ public class AuthResource {
     public Response register(@HeaderParam("email") String email,
                              @HeaderParam("name") String name,
                              @HeaderParam("password") String password) {
-        return null;
+        return Response.ok(accountService.addNewAccount(email, name, password)).build();
     }
 
 
