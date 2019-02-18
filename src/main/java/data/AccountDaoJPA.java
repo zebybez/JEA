@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Stateless
 public class AccountDaoJPA implements AccountDao {
@@ -28,9 +29,14 @@ public class AccountDaoJPA implements AccountDao {
     }
 
     public Account getAccountByEmail(String email){
-        TypedQuery<Account> query = em.createNamedQuery("account.findByEmail", Account.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
+        return em.createNamedQuery("account.findByEmail", Account.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
+
+    public List<Account> getAllAccounts(){
+         return em.createNamedQuery("account.getAll", Account.class)
+                 .getResultList();
     }
 
 }

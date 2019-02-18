@@ -50,7 +50,7 @@ public class JWTHelper {
     /***
      * gets the string from the JWT body, if valid.
      * @param jwsString the JWS
-     * @return the uuid of the account
+     * @return a payload associated with the account
      * @throws ExpiredJwtException
      * @throws MalformedJwtException
      */

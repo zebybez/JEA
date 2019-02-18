@@ -1,5 +1,7 @@
 package domain;
 
+import util.security.Role;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,6 +9,7 @@ import java.io.Serializable;
 @Table(name = "Account")
 @NamedQueries({
         @NamedQuery(name = "account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
+        @NamedQuery(name = "account.getAll", query = "SELECT a FROM Account a"),
         @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a")})
 public class Account implements Serializable {
     @Id
@@ -19,13 +22,13 @@ public class Account implements Serializable {
     private String email;
     private String passwordHash;
     private String salt;
+    private Role role;
     public Account() {
     }
-    public Account(String uuid, Profile profile, String email, String passwordHash) {
-        this.uuid = uuid;
+    public Account(Profile profile, String email, Role role) {
         this.profile = profile;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.role = role;
     }
 
     public Long getId() {
@@ -74,5 +77,13 @@ public class Account implements Serializable {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -6,10 +6,13 @@ import domain.Account;
 import domain.Profile;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import util.security.HashUtil;
+import util.security.JWTHelper;
 import util.security.Payload;
+import util.security.Role;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 public class AccountService {
@@ -45,6 +48,7 @@ public class AccountService {
         Account account = new Account();
 
         account.setEmail(email);
+        account.setRole(Role.Regular);
         String salt = hashUtil.generateSalt();
         account.setSalt(salt);
         account.setPasswordHash(hashUtil.hashString(salt, password));
@@ -54,5 +58,19 @@ public class AccountService {
         profile.setName(name);
         account.setProfile(profile);
         return accountDao.saveAccount(account);
+    }
+
+    public String login(String email, String password) throws SecurityException{
+        //check credentials
+        Account account = accountDao.getAccountByEmail(email);
+        if(hashUtil.hashString(account.getSalt(), password).equals(account.getPasswordHash())){
+            Payload payload = new Payload(email, account.getProfile().getUuid(), account.getRole());
+            return JWTHelper.getInstance().generatePrivateKey(payload);
+        }
+        throw new SecurityException("wrong credentials");
+    }
+
+    public List<Account> getAllAccounts() {
+        return accountDao.getAllAccounts();
     }
 }
