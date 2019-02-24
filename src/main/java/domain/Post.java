@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import domain.interfaces.Judgeable;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class Post implements Judgeable {
     private Subreddit subreddit;
     @ManyToOne
     private Profile creator;
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments;
     private int upvotes;
     private int downvotes;

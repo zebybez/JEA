@@ -18,6 +18,7 @@ public class Subreddit {
     @ManyToMany(mappedBy = "subscriberOf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Profile> subscribers;
     @OneToMany(mappedBy = "subreddit")
+    @JsonIgnore
     private List<Post> posts;
     @ManyToOne
     private Profile creator;

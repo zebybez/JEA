@@ -20,8 +20,9 @@ public class Comment implements Judgeable {
     private Post parent;
     @ManyToOne
     private Comment replyTo;
-    @OneToMany(mappedBy = "replyTo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "replyTo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> replies;
+
     public Comment() {
 
     }
@@ -31,6 +32,14 @@ public class Comment implements Judgeable {
         this.downvotes = downvotes;
         this.creator = creator;
         this.parent = parent;
+    }
+
+    public Comment getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(Comment replyTo) {
+        this.replyTo = replyTo;
     }
 
     public Long getId() {
@@ -45,7 +54,7 @@ public class Comment implements Judgeable {
         return uuid;
     }
 
-    public Judgeable getParent() {
+    public Post getParent() {
         return parent;
     }
 
