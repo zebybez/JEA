@@ -5,8 +5,6 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="JEA" />
-          <factory-entry name="persistenceUnitName" />
           <factory-entry name="postgresql" />
         </datasource-mapping>
         <naming-strategy-map />

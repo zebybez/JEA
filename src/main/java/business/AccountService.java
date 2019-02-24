@@ -1,10 +1,9 @@
 package business;
 
-import data.ProfileDao;
+import data.ProfileDaoJPA;
 import data.interfaces.AccountDao;
 import domain.Account;
 import domain.Profile;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import util.security.HashUtil;
 import util.security.JWTHelper;
 import util.security.Payload;
@@ -18,7 +17,7 @@ import java.util.List;
 public class AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
-    private ProfileDao profileDao;
+    private ProfileDaoJPA profileDaoJPA;
 
 
     public AccountService() {
@@ -30,8 +29,8 @@ public class AccountService {
     }
 
     @Inject
-    public void setProfileDao(ProfileDao profileDao){
-        this.profileDao = profileDao;
+    public void setProfileDaoJPA(ProfileDaoJPA profileDaoJPA){
+        this.profileDaoJPA = profileDaoJPA;
     }
 
     @Inject
@@ -39,10 +38,6 @@ public class AccountService {
         this.hashUtil = hashUtil;
     }
 
-    public Payload getPayloadByCredentials(String email, String password) {
-        //  Payload payload = new Payload();
-        throw new NotImplementedException();
-    }
 
     public Account addNewAccount(String email, String name, String password) {
         Account account = new Account();
@@ -57,7 +52,7 @@ public class AccountService {
 
         profile.setName(name);
         account.setProfile(profile);
-        return accountDao.saveAccount(account);
+        return accountDao.persist(account);
     }
 
     public String login(String email, String password) throws SecurityException{
@@ -71,6 +66,6 @@ public class AccountService {
     }
 
     public List<Account> getAllAccounts() {
-        return accountDao.getAllAccounts();
+        return accountDao.getAll();
     }
 }

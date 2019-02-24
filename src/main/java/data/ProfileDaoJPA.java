@@ -9,8 +9,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
-public class ProfileDao {
+public class ProfileDaoJPA extends BaseDaoJPA<Profile> {
     EntityManager em;
+
+    public ProfileDaoJPA() {
+        super(Profile.class);
+    }
 
     @PersistenceContext
     public void setEm(EntityManager em){

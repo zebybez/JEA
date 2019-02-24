@@ -1,10 +1,7 @@
 package business;
 
-import data.ProfileDao;
-import domain.Account;
+import data.ProfileDaoJPA;
 import domain.Profile;
-import util.security.HashUtil;
-import util.security.HashUtilMD5;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -13,15 +10,15 @@ import java.util.List;
 @Stateless
 public class ProfileService {
 
-    ProfileDao profileDao;
+    ProfileDaoJPA profileDaoJPA;
 
     @Inject
-    public void setProfileDao(ProfileDao profileDao){
-        this.profileDao = profileDao;
+    public void setProfileDaoJPA(ProfileDaoJPA profileDaoJPA){
+        this.profileDaoJPA = profileDaoJPA;
     }
 
     public List<Profile> getProfileList(){
-        return profileDao.getAllProfiles();
+        return profileDaoJPA.getAllProfiles();
     }
 
 }

@@ -1,6 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,17 +16,23 @@ public class Profile {
     private String uuid = UUID.randomUUID().toString();
     private String name;
     private int karmaPoints;
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Post> posts;
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments;
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Subreddit> ownerOf;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @JsonIgnore
     private List<Subreddit> moderatorOf;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @JsonIgnore
     private List<Subreddit> subscriberOf;
     public Profile() {
+        posts = new ArrayList<>();
     }
     public Profile(int karmaPoints, List<Subreddit> moderatorOf, List<Subreddit> subscriberOf, List<Post> posts, List<Comment> comments) {
         this.karmaPoints = karmaPoints;

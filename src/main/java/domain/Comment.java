@@ -20,7 +20,7 @@ public class Comment implements Judgeable {
     private Post parent;
     @ManyToOne
     private Comment replyTo;
-    @OneToMany(mappedBy = "replyTo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "replyTo", cascade = CascadeType.ALL)
     private List<Comment> replies;
     public Comment() {
 

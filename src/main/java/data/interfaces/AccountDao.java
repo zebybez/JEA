@@ -4,10 +4,7 @@ import domain.Account;
 
 import java.util.List;
 
-public interface AccountDao  {
-    public Account saveAccount(Account account);
-
+public interface AccountDao extends BaseDao<Account> {
     Account getAccountByEmail(String email);
-
-    List<Account> getAllAccounts();
+    List<Account> getAll();
 }
