@@ -5,10 +5,8 @@ import business.SubredditService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @RequestScoped
@@ -30,11 +28,13 @@ public class SubredditResource {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getSubreddits(){
         return Response.ok(subredditService.getAllSubreddits()).build();
     }
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addSubreddit(@HeaderParam("creatorId") long creatorId,
                                  @HeaderParam("name") String name) {
         return Response.ok(subredditService.addSubreddit(profileService.getProfileById(creatorId), name)).build();

@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/auth")
@@ -24,6 +26,7 @@ public class AuthResource {
 
     @POST
     @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(@HeaderParam("email") String email,
                           @HeaderParam("password") String password) {
         try {
@@ -38,6 +41,7 @@ public class AuthResource {
 
     @POST
     @Path("/register")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("email") String email,
                              @HeaderParam("name") String name,
                              @HeaderParam("password") String password) {

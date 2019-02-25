@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/profiles")
@@ -20,7 +21,7 @@ public class ProfileResource {
 
     @GET
     @Path("/{name}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getProfiles(@PathParam("name") String name){
         //todo make method restful & all that juicy stuff
         return Response.ok(profileService.getProfileByName(name)).build();
@@ -28,7 +29,7 @@ public class ProfileResource {
     }
 
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getProfiles(){
         //todo make method restful & all that juicy stuff
         return Response.status(Response.Status.OK).entity(profileService.getProfileList()).build();
