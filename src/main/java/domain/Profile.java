@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Profile")
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private long id;
     private String uuid = UUID.randomUUID().toString();
+    @Column(unique = true)
     private String name;
     private int karmaPoints;
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
@@ -52,10 +52,6 @@ public class Profile {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setId(long id) {

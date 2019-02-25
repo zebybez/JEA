@@ -21,4 +21,11 @@ public class ProfileService {
         return profileDaoJPA.getAllProfiles();
     }
 
+    public Profile getProfileByName(String name) {
+        return profileDaoJPA.getProfileByName(name);
+    }
+
+    public Profile getProfileById(long creatorId) {
+        return profileDaoJPA.find(creatorId);
+    }
 }

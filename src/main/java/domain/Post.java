@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Post")
 public class Post implements Judgeable {
 
     @Id

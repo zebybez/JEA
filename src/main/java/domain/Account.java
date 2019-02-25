@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Account")
 @NamedQueries({
         @NamedQuery(name = "account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
         @NamedQuery(name = "account.getAll", query = "SELECT a FROM Account a"),

@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "Subreddit")
 public class Subreddit {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
     @ManyToMany(mappedBy = "moderatorOf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Profile> moderators;
     @ManyToMany(mappedBy = "subscriberOf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

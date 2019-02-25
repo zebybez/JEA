@@ -10,25 +10,19 @@ import java.util.List;
 
 @Stateless
 public class ProfileDaoJPA extends BaseDaoJPA<Profile> {
-    EntityManager em;
 
     public ProfileDaoJPA() {
         super(Profile.class);
     }
 
-    @PersistenceContext
-    public void setEm(EntityManager em){
-        this.em = em;
-    }
-
-    public Profile saveProfile(Profile profile){
-        em.persist(profile);
-        return profile;
-    }
-
-
     public List<Profile> getAllProfiles() {
-        TypedQuery<Profile> query = em.createQuery("SELECT p FROM Profile p", Profile.class);
-        return query.getResultList();
+        return getEm().createQuery("SELECT p FROM Profile p", Profile.class)
+                .getResultList();
+    }
+
+    public Profile getProfileByName(String name) {
+        return getEm().createQuery("SELECT p FROM Profile p WHERE p.name = :name", Profile.class)
+                .setParameter("name", name)
+                .getSingleResult();
     }
 }

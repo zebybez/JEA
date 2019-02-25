@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Comment")
 public class Comment implements Judgeable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
