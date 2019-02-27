@@ -3,7 +3,7 @@
 build/
 out/
 src/main/resources/
-src/test/
+
 # Compiled class file
 *.class
 
