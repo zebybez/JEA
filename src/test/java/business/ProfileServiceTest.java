@@ -1,0 +1,24 @@
+package business;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import javax.validation.constraints.AssertFalse;
+
+import static org.junit.Assert.*;
+
+public class ProfileServiceTest {
+
+    @Test
+    public void getProfileList() {
+    }
+
+    @Test
+    public void getProfileByName() {
+    }
+
+    @Test
+    public void getProfileById() {
+        Assert.assertFalse(true);
+    }
+}
