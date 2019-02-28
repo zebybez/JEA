@@ -11,17 +11,11 @@ import java.util.List;
 
 @Stateless
 public class SubredditService {
-    SubredditDaoJPA subredditDao;
-    ProfileDaoJPA profileDao;
+    private SubredditDaoJPA subredditDao;
 
     @Inject
     public void setSubredditDao(SubredditDaoJPA subredditDao) {
         this.subredditDao = subredditDao;
-    }
-
-    @Inject
-    public void setProfileDao(ProfileDaoJPA profileDao) {
-        this.profileDao = profileDao;
     }
 
     public List<Subreddit> getAllSubreddits() {

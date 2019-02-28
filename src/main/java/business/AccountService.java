@@ -1,6 +1,5 @@
 package business;
 
-import data.ProfileDaoJPA;
 import data.interfaces.AccountDao;
 import domain.Account;
 import domain.Profile;
@@ -17,8 +16,6 @@ import java.util.List;
 public class AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
-    private ProfileDaoJPA profileDaoJPA;
-
 
     public AccountService() {
     }
@@ -26,11 +23,6 @@ public class AccountService {
     @Inject
     public void setAccountDao(AccountDao accountDao) {
         this.accountDao = accountDao;
-    }
-
-    @Inject
-    public void setProfileDaoJPA(ProfileDaoJPA profileDaoJPA){
-        this.profileDaoJPA = profileDaoJPA;
     }
 
     @Inject
