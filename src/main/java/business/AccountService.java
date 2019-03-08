@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Stateless
-public class AccountService {
+public class AccountService implements business.interfaces.AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
 
@@ -31,6 +31,7 @@ public class AccountService {
     }
 
 
+    @Override
     public Account addNewAccount(String email, String name, String password) {
         Account account = new Account();
 
@@ -47,6 +48,7 @@ public class AccountService {
         return accountDao.persist(account);
     }
 
+    @Override
     public String login(String email, String password) throws SecurityException{
         //check credentials
         Account account = accountDao.getAccountByEmail(email);
@@ -57,6 +59,7 @@ public class AccountService {
         throw new SecurityException("wrong credentials");
     }
 
+    @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAll();
     }

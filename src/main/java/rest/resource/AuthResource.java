@@ -1,7 +1,6 @@
 package rest.resource;
 
-import business.AccountService;
-import util.security.Payload;
+import business.interfaces.AccountService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

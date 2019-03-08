@@ -1,7 +1,7 @@
 package rest.resource;
 
-import business.ProfileService;
-import business.SubredditService;
+import business.interfaces.ProfileService;
+import business.interfaces.SubredditService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

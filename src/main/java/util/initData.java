@@ -1,8 +1,8 @@
 package util;
 
-import business.AccountService;
-import business.ProfileService;
-import business.SubredditService;
+import business.interfaces.AccountService;
+import business.interfaces.ProfileService;
+import business.interfaces.SubredditService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Startup;

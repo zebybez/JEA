@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Stateless
-public class ProfileService {
+public class ProfileService implements business.interfaces.ProfileService {
 
     ProfileDaoJPA profileDaoJPA;
 
@@ -17,14 +17,17 @@ public class ProfileService {
         this.profileDaoJPA = profileDaoJPA;
     }
 
+    @Override
     public List<Profile> getProfileList(){
         return profileDaoJPA.getAllProfiles();
     }
 
+    @Override
     public Profile getProfileByName(String name) {
         return profileDaoJPA.getProfileByName(name);
     }
 
+    @Override
     public Profile getProfileById(long creatorId) {
         return profileDaoJPA.find(creatorId);
     }

@@ -19,4 +19,11 @@ public class SubredditDaoJPA extends BaseDaoJPA<Subreddit> implements SubredditD
         return getEm().createQuery("SELECT p FROM Subreddit p", Subreddit.class)
                 .getResultList();
     }
+
+    @Override
+    public Subreddit findByName(String name) {
+        return getEm().createQuery("SELECT p FROM Subreddit p WHERE p.name = :name", Subreddit.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }

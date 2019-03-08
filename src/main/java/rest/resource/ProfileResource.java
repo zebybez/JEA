@@ -1,8 +1,7 @@
 package rest.resource;
 
-import business.ProfileService;
+import business.interfaces.ProfileService;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,7 +11,7 @@ import javax.ws.rs.core.Response;
 @Path("/profiles")
 @RequestScoped
 public class ProfileResource {
-    ProfileService profileService;
+    business.interfaces.ProfileService profileService;
 
     @Inject
     public void setProfileService(ProfileService profileService){

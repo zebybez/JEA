@@ -1,6 +1,6 @@
 package rest.resource;
 
-import business.AccountService;
+import business.interfaces.AccountService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
