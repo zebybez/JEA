@@ -33,7 +33,7 @@ public class SubredditResource {
         return Response.ok(subredditService.getAllSubreddits()).build();
     }
 
-    @POST
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response addSubreddit(@HeaderParam("creatorId") long creatorId,
                                  @HeaderParam("name") String name) {

@@ -21,7 +21,7 @@ public class ProfileResource {
     @GET
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProfiles(@PathParam("name") String name){
+    public Response getSingle(@PathParam("name") String name){
         //todo make method restful & all that juicy stuff
         return Response.ok(profileService.getProfileByName(name)).build();
 
@@ -29,10 +29,16 @@ public class ProfileResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProfiles(){
+    public Response getList(){
         //todo make method restful & all that juicy stuff
         return Response.status(Response.Status.OK).entity(profileService.getProfileList()).build();
     }
 
+    public Response put() {
+        return null;
+    }
 
+    public Response delete() {
+        return null;
+    }
 }
