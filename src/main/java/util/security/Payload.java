@@ -7,13 +7,23 @@ import java.io.Serializable;
  */
 public class Payload implements Serializable {
     private String email;
+    private String name;
     private String ProfileUuid;
     private Role Role;
 
-    public Payload(String email, String profileUuid, Role role) {
+    public Payload(String email, String name, String profileUuid, Role role) {
         this.email = email;
         ProfileUuid = profileUuid;
         Role = role;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

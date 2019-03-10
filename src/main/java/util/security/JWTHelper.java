@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import util.Constants;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.ejb.Stateless;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Stateless
 public class JWTHelper {
     private static JWTHelper jwTokenHelper = null;
     private Key signingKey;

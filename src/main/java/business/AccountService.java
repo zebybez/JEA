@@ -53,7 +53,7 @@ public class AccountService implements business.interfaces.AccountService {
         //check credentials
         Account account = accountDao.getAccountByEmail(email);
         if(hashUtil.hashString(account.getSalt(), password).equals(account.getPasswordHash())){
-            Payload payload = new Payload(email, account.getProfile().getUuid(), account.getRole());
+            Payload payload = new Payload(email, account.getProfile().getName(), account.getProfile().getUuid(), account.getRole());
             return JWTHelper.getInstance().generatePrivateKey(payload);
         }
         throw new SecurityException("wrong credentials");
