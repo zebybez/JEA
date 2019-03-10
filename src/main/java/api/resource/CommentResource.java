@@ -1,4 +1,4 @@
-package rest.resource;
+package api.resource;
 
 public class CommentResource {
 }

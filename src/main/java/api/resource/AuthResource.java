@@ -1,4 +1,4 @@
-package rest.resource;
+package api.resource;
 
 import business.interfaces.AccountService;
 
