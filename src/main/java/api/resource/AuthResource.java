@@ -25,7 +25,7 @@ public class AuthResource {
 
     @POST
     @Path("/login")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response login(@HeaderParam("email") String email,
                           @HeaderParam("password") String password) {
         try {

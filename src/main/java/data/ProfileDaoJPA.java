@@ -4,12 +4,14 @@ import data.interfaces.ProfileDao;
 import domain.Profile;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
+@Default
 public class ProfileDaoJPA extends BaseDaoJPA<Profile> implements ProfileDao {
 
     public ProfileDaoJPA() {

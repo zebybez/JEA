@@ -7,6 +7,7 @@ import util.security.Role;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
@@ -21,15 +22,19 @@ public class ProfileResource {
         this.profileService = profileService;
     }
 
-    @Inject
+    @Context
     SecurityContext securityContext;
 
+    @Secured
     @GET
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSingle(@PathParam("name") String name){
         //todo make method restful & all that juicy stuff
-        return Response.ok(profileService.getProfileByName(name)).build();
+        if(securityContext.getUserPrincipal() != null && securityContext.getUserPrincipal().getName().equals(name)) {
+            return Response.ok(profileService.getProfileByName(name)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
 
     }
 
@@ -38,7 +43,7 @@ public class ProfileResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getList(){
         //todo make method restful & all that juicy stuff
-        securityContext.getUserPrincipal().getName();
+        //securityContext.getUserPrincipal().getName();
         return Response.status(Response.Status.OK).entity(profileService.getProfileList()).build();
     }
 

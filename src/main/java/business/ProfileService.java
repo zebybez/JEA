@@ -1,6 +1,6 @@
 package business;
 
-import data.ProfileDaoJPA;
+import data.interfaces.ProfileDao;
 import domain.Profile;
 
 import javax.ejb.Stateless;
@@ -10,25 +10,25 @@ import java.util.List;
 @Stateless
 public class ProfileService implements business.interfaces.ProfileService {
 
-    ProfileDaoJPA profileDaoJPA;
+    ProfileDao profileDao;
 
     @Inject
-    public void setProfileDaoJPA(ProfileDaoJPA profileDaoJPA){
-        this.profileDaoJPA = profileDaoJPA;
+    public void setProfileDao(ProfileDao profileDao){
+        this.profileDao = profileDao;
     }
 
     @Override
     public List<Profile> getProfileList(){
-        return profileDaoJPA.getAllProfiles();
+        return profileDao.getAllProfiles();
     }
 
     @Override
     public Profile getProfileByName(String name) {
-        return profileDaoJPA.getProfileByName(name);
+        return profileDao.getProfileByName(name);
     }
 
     @Override
     public Profile getProfileById(long creatorId) {
-        return profileDaoJPA.find(creatorId);
+        return profileDao.find(creatorId);
     }
 }

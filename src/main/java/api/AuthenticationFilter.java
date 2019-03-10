@@ -1,5 +1,7 @@
 package api;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import util.annotations.Secured;
 import util.security.JWTHelper;
 import util.security.Payload;
@@ -20,20 +22,21 @@ import java.security.Principal;
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
-public class AuthFilter implements ContainerRequestFilter {
-    @Inject
-    JWTHelper jwtHelper;
+public class AuthenticationFilter implements ContainerRequestFilter {
+
+    private static final String AUTHENTICATION_SCHEME = "Bearer";
+    JWTHelper jwtHelper = JWTHelper.getInstance();
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        try{// Get the Authorization header from the request
+        try {// Get the Authorization header from the request
             String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
             // Extract the token from the Authorization header
-            String token = authorizationHeader;
+            String token = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
 
             // Validate the token
-            Payload payload = validateToken(token);
+            String userName = validateToken(token);
 
             final SecurityContext securityContext = requestContext.getSecurityContext();
             requestContext.setSecurityContext(new SecurityContext() {
@@ -42,11 +45,7 @@ public class AuthFilter implements ContainerRequestFilter {
                     return new UserPrincipal() {
                         @Override
                         public String getName() {
-                            return payload.getName();
-                        }
-
-                        public String getUUID(){
-                            return payload.getProfileUuid();
+                            return userName;
                         }
                     };
                 }
@@ -66,7 +65,11 @@ public class AuthFilter implements ContainerRequestFilter {
                     return securityContext.getAuthenticationScheme();
                 }
             });
-        } catch (Exception e){
+        } catch (MalformedJwtException e) {
+            requestContext.abortWith(Response.status(Response.Status.BAD_REQUEST).build());
+        } catch (ExpiredJwtException e) {
+            requestContext.abortWith(Response.status(Response.Status.GATEWAY_TIMEOUT).build());
+        } catch (Exception e) {
             abortWithUnauthorized(requestContext);
         }
     }
@@ -78,8 +81,7 @@ public class AuthFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    private Payload validateToken(String token){
-        Payload payload = jwtHelper.claimKey(token);
-        return payload;
+    private String validateToken(String token) {
+        return jwtHelper.claimKey(token);
     }
 }
