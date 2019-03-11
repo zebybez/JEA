@@ -1,6 +1,5 @@
 package business;
 
-import data.ProfileDaoJPA;
 import data.interfaces.AccountDao;
 import domain.Account;
 import domain.Profile;
@@ -14,11 +13,9 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Stateless
-public class AccountService {
+public class AccountService implements business.interfaces.AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
-    private ProfileDaoJPA profileDaoJPA;
-
 
     public AccountService() {
     }
@@ -29,16 +26,12 @@ public class AccountService {
     }
 
     @Inject
-    public void setProfileDaoJPA(ProfileDaoJPA profileDaoJPA){
-        this.profileDaoJPA = profileDaoJPA;
-    }
-
-    @Inject
     public void setHashUtil(HashUtil hashUtil) {
         this.hashUtil = hashUtil;
     }
 
 
+    @Override
     public Account addNewAccount(String email, String name, String password) {
         Account account = new Account();
 
@@ -55,16 +48,18 @@ public class AccountService {
         return accountDao.persist(account);
     }
 
+    @Override
     public String login(String email, String password) throws SecurityException{
         //check credentials
         Account account = accountDao.getAccountByEmail(email);
         if(hashUtil.hashString(account.getSalt(), password).equals(account.getPasswordHash())){
-            Payload payload = new Payload(email, account.getProfile().getUuid(), account.getRole());
+            Payload payload = new Payload(email, account.getProfile().getName(), account.getProfile().getUuid(), account.getRole());
             return JWTHelper.getInstance().generatePrivateKey(payload);
         }
         throw new SecurityException("wrong credentials");
     }
 
+    @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAll();
     }

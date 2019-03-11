@@ -5,13 +5,15 @@ import io.jsonwebtoken.*;
 import util.Constants;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.ejb.Stateless;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
+//todo make this class a bean, not a singleton.
+@Stateless
 public class JWTHelper {
     private static JWTHelper jwTokenHelper = null;
     private Key signingKey;
@@ -54,12 +56,13 @@ public class JWTHelper {
      * @throws ExpiredJwtException
      * @throws MalformedJwtException
      */
-    public Payload claimKey(String jwsString) throws ExpiredJwtException, MalformedJwtException {
+    public String claimKey(String jwsString) throws ExpiredJwtException, MalformedJwtException {
         Jwt jwt = Jwts.parser()
                 .setSigningKey(signingKey)
                 .parse(jwsString);
         Claims claims = (Claims) jwt.getBody();
-        return (Payload) claims.get("payload");
+        HashMap payloadMap = (HashMap) claims.get("payload");
+        return (String) payloadMap.get("name");
     }
 
     private Date calcExpirationDate() {
