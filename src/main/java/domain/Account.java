@@ -4,7 +4,7 @@ import util.security.Role;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+//todo make roles a list.
 @Entity
 @NamedQueries({
         @NamedQuery(name = "account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),

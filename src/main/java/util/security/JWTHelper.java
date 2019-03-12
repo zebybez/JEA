@@ -56,13 +56,12 @@ public class JWTHelper {
      * @throws ExpiredJwtException
      * @throws MalformedJwtException
      */
-    public String claimKey(String jwsString) throws ExpiredJwtException, MalformedJwtException {
+    public HashMap claimKey(String jwsString) throws ExpiredJwtException, MalformedJwtException {
         Jwt jwt = Jwts.parser()
                 .setSigningKey(signingKey)
                 .parse(jwsString);
         Claims claims = (Claims) jwt.getBody();
-        HashMap payloadMap = (HashMap) claims.get("payload");
-        return (String) payloadMap.get("name");
+        return  (HashMap) claims.get("payload");
     }
 
     private Date calcExpirationDate() {

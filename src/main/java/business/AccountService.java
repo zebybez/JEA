@@ -1,5 +1,6 @@
 package business;
 
+import business.interfaces.ProfileService;
 import data.interfaces.AccountDao;
 import domain.Account;
 import domain.Profile;
@@ -16,8 +17,14 @@ import java.util.List;
 public class AccountService implements business.interfaces.AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
+    private ProfileService profileService;
 
     public AccountService() {
+    }
+
+    @Inject
+    public void setProfileService(ProfileService profileService){
+        this.profileService = profileService;
     }
 
     @Inject
@@ -62,5 +69,11 @@ public class AccountService implements business.interfaces.AccountService {
     @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAll();
+    }
+
+    @Override
+    public Account getAccountByProfileName(String name){
+        Profile profile = profileService.getProfileByName(name);
+        return accountDao.getByProfileId(profile.getId());
     }
 }
