@@ -1,7 +1,6 @@
 package api.resource;
 
 import business.interfaces.PostService;
-import com.sun.xml.internal.ws.client.RequestContext;
 import util.annotations.Secured;
 
 import javax.enterprise.context.RequestScoped;

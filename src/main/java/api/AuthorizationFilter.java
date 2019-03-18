@@ -1,7 +1,7 @@
 package api;
 
 
-import business.AccountService;
+import business.interfaces.AccountService;
 import domain.Account;
 import util.annotations.Secured;
 import util.security.Role;
@@ -18,7 +18,6 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +43,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         List<Role> classRoles = extractRoles(resourceInfo.getResourceClass());
         List<Role> methodRoles = extractRoles(resourceInfo.getResourceMethod());
 
-        String profileName = securityContext.getUserPrincipal().getName();
+        profileName = securityContext.getUserPrincipal().getName();
 
         try {
             if (methodRoles.isEmpty()) {
@@ -76,6 +75,9 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private void checkPermissions(List<Role> allowedRoles) throws SecurityException {
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
+        if(allowedRoles.isEmpty()){
+            return;
+        }
         Account account = accountService.getAccountByProfileName(profileName);
         if(!allowedRoles.contains(account.getRole())){
             throw new SecurityException("user not in role");
