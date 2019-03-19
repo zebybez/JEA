@@ -10,4 +10,8 @@ public interface ProfileService {
     Profile getProfileByName(String name);
 
     Profile getProfileById(long creatorId);
+
+    List<Profile> getSubscribersOfSubreddit(String subreddit);
+
+    List<Profile> getModeratorsOfSubreddit(String subreddit);
 }
