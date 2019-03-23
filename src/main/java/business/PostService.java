@@ -53,4 +53,24 @@ public class PostService implements business.interfaces.PostService {
     public List<Post> getAll() {
         return postDao.getAll();
     }
+
+    @Override
+    public List<Post> getPostsByUser(String userName) {
+        return null;
+    }
+
+    @Override
+    public List<Post> getPostsInSubreddit(String subreddit) {
+        return null;
+    }
+
+    @Override
+    public Post deletePost(long id) {
+        return null;
+    }
+
+    @Override
+    public Post getPost(long id) {
+        return null;
+    }
 }
