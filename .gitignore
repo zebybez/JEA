@@ -63,3 +63,4 @@ gradle-app.setting
 .idea/JEA.iml
 .idea/modules.xml
 !/src/main/java/data/persistence.xml
+!/src/test/resources/META-INF/persistence.xml

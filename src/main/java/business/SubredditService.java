@@ -1,11 +1,9 @@
 package business;
 
-import data.ProfileDaoJPA;
-import data.SubredditDaoJPA;
 import data.interfaces.SubredditDao;
 import domain.Profile;
 import domain.Subreddit;
-
+import business.interfaces.ProfileService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Context;
