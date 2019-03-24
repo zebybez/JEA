@@ -3,7 +3,6 @@ package business;
 import data.AccountDaoJPA;
 import data.ProfileDaoJPA;
 import domain.Account;
-import org.hibernate.exception.DataException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,6 +28,7 @@ public class AccountServiceIT {
         em = emf.createEntityManager();
         tx = em.getTransaction();
 
+        //clean the database off previous test contamination
         try {
             new DatabaseCleaner(emf.createEntityManager()).clean();
         } catch (SQLException ex) {
@@ -52,7 +52,8 @@ public class AccountServiceIT {
 
     }
 
-    private void addTestAccount(){
+    @Test
+    public void addAccountTest(){
         tx.begin();
         accountService.addNewAccount("peter@test.com", "peter", "peter");
         tx.commit();
@@ -65,8 +66,8 @@ public class AccountServiceIT {
 
 
     @Test
-    public void addNewAccount() {
-        addTestAccount();
+    public void getAccountByNameTest() {
+        addAccountTest();
         tx.begin();
         Account account = accountService.getAccountByProfileName("peter");
         tx.commit();
@@ -75,8 +76,18 @@ public class AccountServiceIT {
 
     @Test(expected = RollbackException.class)
     public void nameCollisionTest(){
-        addTestAccount();
-        addTestAccount();
+        addAccountTest();
+        addAccountTest();
+    }
+
+    @Test
+    public void loginTest(){
+        addAccountTest();
+        tx.begin();
+        String token = accountService.login("peter@test.com", "peter");
+        tx.commit();
+        Assert.assertNotNull(token);
+        Assert.assertFalse(token.equals(""));
     }
 
 
