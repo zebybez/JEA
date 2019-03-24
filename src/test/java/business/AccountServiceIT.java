@@ -11,9 +11,6 @@ import util.DatabaseCleaner;
 import util.security.HashUtilMD5;
 
 import javax.persistence.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AccountServiceIT {
     private AccountService accountService;
@@ -28,13 +25,8 @@ public class AccountServiceIT {
         em = emf.createEntityManager();
         tx = em.getTransaction();
 
-        //clean the database off previous test contamination
-        try {
-            new DatabaseCleaner(emf.createEntityManager()).clean();
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountServiceIT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        //clean the database off previous test contamination (different entityManager necessary)
+        new DatabaseCleaner(emf.createEntityManager()).clean();
 
         //setup the class to test (accountService)
         accountService = new AccountService();

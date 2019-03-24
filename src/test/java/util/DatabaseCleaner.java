@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public class DatabaseCleaner {
 
+    private final EntityManager em;
     private static final Class<?>[] ENTITY_TYPES = {
             Profile.class,
             Account.class,
@@ -15,13 +16,12 @@ public class DatabaseCleaner {
             Subreddit.class,
             Comment.class
     };
-    private final EntityManager em;
 
     public DatabaseCleaner(EntityManager entityManager) {
         em = entityManager;
     }
 
-    public void clean() throws SQLException {
+    public void clean() {
         em.getTransaction().begin();
 
         for (Class<?> entityType : ENTITY_TYPES) {
@@ -35,7 +35,7 @@ public class DatabaseCleaner {
         em.createQuery("delete from " + getEntityName(entityType)).executeUpdate();
     }
 
-    protected String getEntityName(Class<?> clazz) {
+    private String getEntityName(Class<?> clazz) {
         EntityType et = em.getMetamodel().entity(clazz);
         return et.getName();
     }
