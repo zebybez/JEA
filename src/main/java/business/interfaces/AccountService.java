@@ -12,4 +12,8 @@ public interface AccountService {
     List<Account> getAllAccounts();
 
     Account getAccountByProfileName(String name);
+
+    Account setAdmin(long accountId);
+
+    Account setRegular(long accountId);
 }

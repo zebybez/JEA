@@ -9,7 +9,8 @@ import java.io.Serializable;
 @NamedQueries({
         @NamedQuery(name = "account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
         @NamedQuery(name = "account.getAll", query = "SELECT a FROM Account a"),
-        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a")})
+        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a"),
+        @NamedQuery(name = "account.getByProfileId", query = "SELECT a FROM Account a WHERE a.profile.id = :id")})
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

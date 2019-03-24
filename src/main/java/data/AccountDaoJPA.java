@@ -28,7 +28,7 @@ public class AccountDaoJPA extends BaseDaoJPA<Account> implements AccountDao {
 
     @Override
     public Account getByProfileId(long id){
-        return getEm().createQuery("SELECT a FROM Account a WHERE a.profile.id = :id", Account.class)
+        return getEm().createNamedQuery("account.getByProfileId", Account.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
