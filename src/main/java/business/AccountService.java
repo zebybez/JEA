@@ -92,4 +92,9 @@ public class AccountService implements business.interfaces.AccountService {
         account.setRole(Role.Regular);
         return accountDao.merge(account);
     }
+
+    @Override
+    public void removeAccount(Account account) {
+        accountDao.delete(account);
+    }
 }

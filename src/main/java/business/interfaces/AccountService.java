@@ -16,4 +16,6 @@ public interface AccountService {
     Account setAdmin(long accountId);
 
     Account setRegular(long accountId);
+
+    void removeAccount(Account account);
 }

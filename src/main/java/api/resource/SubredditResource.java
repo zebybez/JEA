@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @RequestScoped
-@Path("/r")
+@Path("/subreddits")
 public class SubredditResource {
 
     SubredditService subredditService;
