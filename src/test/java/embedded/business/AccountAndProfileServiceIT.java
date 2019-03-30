@@ -17,6 +17,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,6 +81,8 @@ public class AccountAndProfileServiceIT {
             accountService.addNewAccount("peter@test.com", "peter", "peter");
             accountService.addNewAccount("henk@test.com", "henk", "henk");
             utx.commit();
+//            utx.begin();
+//            em.joinTransaction();
         } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException e) {
             e.printStackTrace();
         }
@@ -88,6 +91,7 @@ public class AccountAndProfileServiceIT {
     @After
     public void getdown(){
         try {
+//            utx.commit();
             utx.begin();
             accountService.removeAccount(accountService.getAccountByProfileName("henk"));
             accountService.removeAccount(accountService.getAccountByProfileName("peter"));
@@ -99,26 +103,43 @@ public class AccountAndProfileServiceIT {
 
     @Test
     public void getProfileList(){
-        profileService.getProfileList();
+        Assert.assertEquals(2, profileService.getProfileList().size());
     }
 
     @Test
     public void getProfileByName() {
-
+        Profile profile = profileService.getProfileByName("henk");
+        Assert.assertEquals("henk", profile.getName());
     }
 
     @Test
     public void getProfileById() {
-
+        Profile profile = profileService.getProfileById(3);
+        Assert.assertNotNull(profile);
     }
 
     @Test
-    public void getSubscribersOfSubreddit() {
+    public void getAccountByNameTest() {
+        Account account = accountService.getAccountByProfileName("peter");
+        Assert.assertNotNull(account);
+    }
 
+    @Test(expected = javax.persistence.RollbackException.class)
+    public void nameCollisionTest(){
+        accountService.addNewAccount("peter@test.com", "peter", "peter");
     }
 
     @Test
-    public void getModeratorsOfSubreddit() {
+    public void loginTest(){
+        String token = accountService.login("peter@test.com", "peter");
+        Assert.assertNotNull(token);
+        Assert.assertFalse(token.equals(""));
+    }
 
+    @Test(expected = SecurityException.class)
+    public void loginFailTest(){
+        String token = accountService.login("peter@test.com", "theWrongPassword");
+        Assert.assertNotNull(token);
+        Assert.assertFalse(token.equals(""));
     }
 }

@@ -28,8 +28,8 @@ public class ProfileService implements business.interfaces.ProfileService {
     }
 
     @Override
-    public Profile getProfileById(long creatorId) {
-        return profileDao.find(creatorId);
+    public Profile getProfileById(long id) {
+        return profileDao.find(id);
     }
 
     @Override
