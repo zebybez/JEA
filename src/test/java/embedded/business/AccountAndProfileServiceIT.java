@@ -12,12 +12,9 @@ import data.interfaces.ProfileDao;
 import domain.*;
 import domain.interfaces.Judgeable;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.gradle.archive.importer.embedded.EmbeddedGradleImporter;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Before;
@@ -33,10 +30,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.*;
-import java.util.List;
 
 @RunWith(Arquillian.class)
-public class ProfileServiceIT {
+public class AccountAndProfileServiceIT {
 
     @Deployment
     public static WebArchive createProfileDeployment() {
@@ -84,9 +80,7 @@ public class ProfileServiceIT {
             accountService.addNewAccount("peter@test.com", "peter", "peter");
             accountService.addNewAccount("henk@test.com", "henk", "henk");
             utx.commit();
-        } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-            e.printStackTrace();
-        } catch (SystemException e) {
+        } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException e) {
             e.printStackTrace();
         }
     }
@@ -95,12 +89,10 @@ public class ProfileServiceIT {
     public void getdown(){
         try {
             utx.begin();
-        accountService.removeAccount(accountService.getAccountByProfileName("henk"));
-        accountService.removeAccount(accountService.getAccountByProfileName("peter"));
+            accountService.removeAccount(accountService.getAccountByProfileName("henk"));
+            accountService.removeAccount(accountService.getAccountByProfileName("peter"));
             utx.commit();
-        } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-            e.printStackTrace();
-        } catch (SystemException e) {
+        } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException e) {
             e.printStackTrace();
         }
     }
