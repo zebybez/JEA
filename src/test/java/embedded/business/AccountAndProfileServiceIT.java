@@ -29,6 +29,8 @@ import util.DatabaseCleaner;
 import util.security.*;
 
 import javax.annotation.Resource;
+import javax.ejb.EJBException;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -134,7 +136,7 @@ public class AccountAndProfileServiceIT {
         Assert.assertNotNull(account);
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = EJBTransactionRolledbackException.class)
     public void nameCollisionTest() {
         accountService.addNewAccount("peter@test.com", "peter", "peter");
     }
@@ -146,7 +148,7 @@ public class AccountAndProfileServiceIT {
         Assert.assertFalse(token.equals(""));
     }
 
-    @Test(expected = SecurityException.class)
+    @Test(expected = EJBException.class)
     public void loginFailTest() {
         String token = accountService.login("peter@test.com", "theWrongPassword");
         Assert.assertNotNull(token);
