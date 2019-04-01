@@ -46,8 +46,6 @@ public class AccountAndProfileServiceIT {
     private ProfileService profileService;
     @Inject
     private AccountService accountService;
-    @PersistenceContext
-    private EntityManager em;
     @Resource
     private UserTransaction utx;
 
@@ -93,17 +91,14 @@ public class AccountAndProfileServiceIT {
             accountService.addNewAccount("peter@test.com", "peter", "peter");
             accountService.addNewAccount("henk@test.com", "henk", "henk");
             utx.commit();
-//            utx.begin();
-//            em.joinTransaction();
         } catch (NotSupportedException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException e) {
             e.printStackTrace();
         }
     }
 
     @After
-    public void getdown() {
+    public void getDown() {
         try {
-//            utx.commit();
             utx.begin();
             accountService.removeAccount(accountService.getAccountByProfileName("henk"));
             accountService.removeAccount(accountService.getAccountByProfileName("peter"));
