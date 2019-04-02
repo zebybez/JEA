@@ -3,6 +3,7 @@
 build/
 out/
 src/main/resources/
+*.iml
 
 # Compiled class file
 *.class
