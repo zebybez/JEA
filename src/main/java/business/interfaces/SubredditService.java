@@ -17,6 +17,6 @@ public interface SubredditService {
 
     List<Subreddit> getModeratedSubs(String userName);
 
-    Subreddit editSubreddit(String name, String rules, List<String> moderators);
+    Subreddit editSubreddit(String name, String rules);
 
 }

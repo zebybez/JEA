@@ -71,9 +71,8 @@ public class SubredditResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response editSubreddit(@HeaderParam("name") String name,
-                                  @HeaderParam("rules") String rules,
-                                  @HeaderParam("moderators") List<String> moderators) {
-        return Response.ok(subredditService.editSubreddit(name, rules, moderators)).build();
+                                  @HeaderParam("rules") String rules) {
+        return Response.ok(subredditService.editSubreddit(name, rules)).build();
     }
 
     @POST
