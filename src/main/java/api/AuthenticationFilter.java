@@ -4,10 +4,9 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import util.annotations.Secured;
 import util.security.JWTHelper;
-import util.security.Payload;
+import util.security.Role;
 
 import javax.annotation.Priority;
-import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -18,6 +17,7 @@ import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
+import java.util.HashMap;
 
 @Secured
 @Provider
@@ -36,7 +36,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String token = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
 
             // Validate the token
-            String userName = validateToken(token);
+            HashMap userMap = validateToken(token);
 
             final SecurityContext securityContext = requestContext.getSecurityContext();
             requestContext.setSecurityContext(new SecurityContext() {
@@ -45,14 +45,18 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                     return new UserPrincipal() {
                         @Override
                         public String getName() {
-                            return userName;
+                            return (String) userMap.get("name");
                         }
                     };
                 }
 
                 @Override
                 public boolean isUserInRole(String role) {
-                    return true;
+                    Role userRole = (Role) userMap.get("role");
+                    if(userRole.toString() == role){
+                        return true;
+                    }
+                    return false;
                 }
 
                 @Override
@@ -81,7 +85,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    private String validateToken(String token) {
+    private HashMap validateToken(String token) {
         return jwtHelper.claimKey(token);
     }
 }

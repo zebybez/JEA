@@ -1,6 +1,8 @@
 package api.resource;
 
 import business.interfaces.AccountService;
+import util.annotations.Secured;
+import util.security.Role;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -9,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Secured({Role.Admin})
 @Path("/accounts")
 public class AccountResource {
 
@@ -24,4 +27,6 @@ public class AccountResource {
     public Response getAccounts(){
         return Response.ok(accountService.getAllAccounts()).build();
     }
+
+
 }

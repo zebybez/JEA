@@ -14,6 +14,7 @@ public class PostDaoJPA extends BaseDaoJPA<Post> implements PostDao {
 
     @Override
     public List<Post> getAll() {
-        return null;
+        return getEm().createQuery("SELECT p FROM Post p", Post.class)
+                .getResultList();
     }
 }

@@ -1,2 +1,4 @@
 rootProject.name = 'Reddit'
 
+include ":main"
+include ":test"

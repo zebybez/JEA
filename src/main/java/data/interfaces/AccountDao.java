@@ -7,4 +7,6 @@ import java.util.List;
 public interface AccountDao extends BaseDao<Account> {
     Account getAccountByEmail(String email);
     List<Account> getAll();
+
+    Account getByProfileId(long id);
 }

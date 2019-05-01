@@ -10,4 +10,12 @@ public interface AccountService {
     String login(String email, String password) throws SecurityException;
 
     List<Account> getAllAccounts();
+
+    Account getAccountByProfileName(String name);
+
+    Account setAdmin(long accountId);
+
+    Account setRegular(long accountId);
+
+    void removeAccount(Account account);
 }

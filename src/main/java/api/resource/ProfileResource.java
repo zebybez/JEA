@@ -47,6 +47,28 @@ public class ProfileResource {
         return Response.status(Response.Status.OK).entity(profileService.getProfileList()).build();
     }
 
+    @GET
+    @Path("subs/{subreddit}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSubscribersOfSubreddit(@PathParam("subreddit") String subreddit){
+        try{
+            return Response.ok(profileService.getSubscribersOfSubreddit(subreddit)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @GET
+    @Path("mods/{subreddit}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getModeratorsOfSubreddit(@PathParam("subreddit") String subreddit){
+        try{
+            return Response.ok(profileService.getModeratorsOfSubreddit(subreddit)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     public Response put() {
         return null;
     }

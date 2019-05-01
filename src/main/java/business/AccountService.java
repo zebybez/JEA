@@ -1,8 +1,10 @@
 package business;
 
+import business.interfaces.ProfileService;
 import data.interfaces.AccountDao;
 import domain.Account;
 import domain.Profile;
+import util.annotations.Secured;
 import util.security.HashUtil;
 import util.security.JWTHelper;
 import util.security.Payload;
@@ -16,8 +18,14 @@ import java.util.List;
 public class AccountService implements business.interfaces.AccountService {
     private HashUtil hashUtil;
     private AccountDao accountDao;
+    private ProfileService profileService;
 
     public AccountService() {
+    }
+
+    @Inject
+    public void setProfileService(ProfileService profileService){
+        this.profileService = profileService;
     }
 
     @Inject
@@ -59,8 +67,34 @@ public class AccountService implements business.interfaces.AccountService {
         throw new SecurityException("wrong credentials");
     }
 
+    @Secured
     @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAll();
+    }
+
+    @Override
+    public Account getAccountByProfileName(String name){
+        Profile profile = profileService.getProfileByName(name);
+        return accountDao.getByProfileId(profile.getId());
+    }
+
+    @Override
+    public Account setAdmin(long accountId){
+        Account account = accountDao.find(accountId);
+        account.setRole(Role.Admin);
+        return accountDao.merge(account);
+    }
+
+    @Override
+    public Account setRegular(long accountId){
+        Account account = accountDao.find(accountId);
+        account.setRole(Role.Regular);
+        return accountDao.merge(account);
+    }
+
+    @Override
+    public void removeAccount(Account account) {
+        accountDao.delete(account);
     }
 }

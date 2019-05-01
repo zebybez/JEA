@@ -28,7 +28,17 @@ public class ProfileService implements business.interfaces.ProfileService {
     }
 
     @Override
-    public Profile getProfileById(long creatorId) {
-        return profileDao.find(creatorId);
+    public Profile getProfileById(long id) {
+        return profileDao.find(id);
+    }
+
+    @Override
+    public List<Profile> getSubscribersOfSubreddit(String subreddit) {
+        return null;
+    }
+
+    @Override
+    public List<Profile> getModeratorsOfSubreddit(String subreddit) {
+        return null;
     }
 }
