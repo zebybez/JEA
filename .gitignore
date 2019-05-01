@@ -60,7 +60,10 @@ gradle-app.setting
 
 
 
-.idea/JEA.iml
+*.iml
+.idea
 .idea/modules.xml
 !/src/main/java/data/persistence.xml
 !/src/test/resources/META-INF/persistence.xml
+!/src/main/webapp/WEB-INF/jboss-web.xml
+!/src/main/webapp/WEB-INF/web.xml
