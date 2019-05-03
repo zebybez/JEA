@@ -47,7 +47,9 @@ public class AccountService implements business.interfaces.AccountService {
         account.setRole(Role.Regular);
         String salt = hashUtil.generateSalt();
         account.setSalt(salt);
-        account.setPasswordHash(hashUtil.hashString(salt, password));
+        //account.setPasswordHash(hashUtil.hashString(salt, password));
+        //I NEED TO DO THIS BECAUSE JAAS DOES NOT LET ME USE SALT
+        account.setPasswordHash(hashUtil.hashString(password));
 
         Profile profile = new Profile();
 
@@ -60,7 +62,7 @@ public class AccountService implements business.interfaces.AccountService {
     public String login(String email, String password) throws SecurityException{
         //check credentials
         Account account = accountDao.getAccountByEmail(email);
-        if(hashUtil.hashString(account.getSalt(), password).equals(account.getPasswordHash())){
+        if(hashUtil.hashString(password).equals(account.getPasswordHash())){
             Payload payload = new Payload(email, account.getProfile().getName(), account.getProfile().getUuid(), account.getRole());
             return JWTHelper.getInstance().generatePrivateKey(payload);
         }
