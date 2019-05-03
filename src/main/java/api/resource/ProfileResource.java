@@ -2,7 +2,6 @@ package api.resource;
 
 import business.interfaces.ProfileService;
 import util.annotations.Secured;
-import util.security.Role;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

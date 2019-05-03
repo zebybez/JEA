@@ -1,6 +1,6 @@
 package util.security;
 
-public enum Role {
+public enum RoleType {
     Admin,
     Regular,
     God

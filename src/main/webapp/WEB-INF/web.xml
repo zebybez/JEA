@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <web-app>
-    <security-role>
+<!--    <security-role>
         <role-name>admin</role-name>
     </security-role>
     <security-constraint>
@@ -15,5 +15,5 @@
     </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
-    </login-config>
+    </login-config>-->
 </web-app>
