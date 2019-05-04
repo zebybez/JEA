@@ -18,6 +18,14 @@ public class Payload implements Serializable {
         this.roleName = roleName;
     }
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public String getName() {
         return name;
     }

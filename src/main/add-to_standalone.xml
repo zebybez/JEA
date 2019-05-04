@@ -1,0 +1,12 @@
+<security-domain name="redditSec" cache-type="default">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/postgres"/>
+            <module-option name="principalsQuery" value="SELECT passwordhash FROM account WHERE email=? LIMIT 1"/>
+            <module-option name="rolesQuery" value="SELECT name FROM role where id = (SELECT role_id FROM account WHERE account.email =? LIMIT 1)"/>
+            <module-option name="hashAlogrithm" value="MD5"/>
+            <module-option name="hashEncoding" value="hex"/>
+            <module-option name="unauthenticatedIdentity" value="guest"/>
+        </login-module>
+    </authentication>
+</security-domain>

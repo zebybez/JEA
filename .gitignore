@@ -67,3 +67,4 @@ gradle-app.setting
 !/src/test/resources/META-INF/persistence.xml
 !/src/main/webapp/WEB-INF/jboss-web.xml
 !/src/main/webapp/WEB-INF/web.xml
+!/src/main/add-to_standalone.xml
