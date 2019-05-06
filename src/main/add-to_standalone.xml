@@ -2,10 +2,9 @@
     <authentication>
         <login-module code="Database" flag="required">
             <module-option name="dsJndiName" value="java:/postgres"/>
-            <module-option name="principalsQuery" value="SELECT passwordhash FROM account WHERE email=? LIMIT 1"/>
-            <module-option name="rolesQuery" value="SELECT name FROM role where id = (SELECT role_id FROM account WHERE account.email =? LIMIT 1)"/>
+            <module-option name="principalsQuery" value="SELECT passwordhash as Password FROM account WHERE email=? LIMIT 1"/>
+            <module-option name="rolesQuery" value="SELECT name as Role, name as RoleGroup FROM role where id = (SELECT role_id FROM account WHERE account.email =? LIMIT 1)"/>
             <module-option name="hashAlgorithm" value="MD5"/>
-            <module-option name="hashEncoding" value="hex"/>
             <module-option name="unauthenticatedIdentity" value="guest"/>
         </login-module>
     </authentication>
