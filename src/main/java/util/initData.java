@@ -1,5 +1,6 @@
 package util;
 
+import business.interfaces.PostService;
 import business.interfaces.AccountService;
 import business.interfaces.ProfileService;
 import business.interfaces.SubredditService;
@@ -21,6 +22,9 @@ public class initData {
 
     @Inject
     private SubredditService subredditService;
+
+    @Inject
+    private PostService postService;
 
     @PostConstruct
     public void initialize(){
@@ -44,7 +48,9 @@ public class initData {
         subredditService.addSubreddit(profileService.getProfileByName("henk"), "henkssub");
     }
 
-    private void initPosts(){}
+    private void initPosts(){
+        postService.add("peter", "henkssub", "heyHenk", "ik heb een post gedaan in je sub", false);
+    }
 
     private void initComments(){}
 }
