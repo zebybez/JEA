@@ -47,7 +47,7 @@ public class ProfileResource {
     }
 
     @GET
-    @Path("subs/{subreddit}")
+    @Path("/subs/{subreddit}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSubscribersOfSubreddit(@PathParam("subreddit") String subreddit){
         try{
@@ -58,7 +58,7 @@ public class ProfileResource {
     }
 
     @GET
-    @Path("mods/{subreddit}")
+    @Path("/mods/{subreddit}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getModeratorsOfSubreddit(@PathParam("subreddit") String subreddit){
         try{

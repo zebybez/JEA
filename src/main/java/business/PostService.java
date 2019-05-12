@@ -61,7 +61,8 @@ public class PostService implements business.interfaces.PostService {
 
     @Override
     public List<Post> getPostsInSubreddit(String subreddit) {
-        return subredditService.getSubredditByName(subreddit).getPosts();
+        //return subredditService.getSubredditByName(subreddit).getPosts();
+        return postDao.getAllInSubreddit(subreddit);
     }
 
     @Override
