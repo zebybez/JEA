@@ -1,7 +1,5 @@
 package domain;
 
-import util.security.Role;
-
 import javax.persistence.*;
 import java.io.Serializable;
 //todo make roles a list.
@@ -22,6 +20,7 @@ public class Account implements Serializable {
     private String email;
     private String passwordHash;
     private String salt;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Role role;
     public Account() {
     }

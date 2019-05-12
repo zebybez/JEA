@@ -2,7 +2,6 @@ package webbean;
 
 import business.interfaces.AccountService;
 import domain.Account;
-import util.security.Role;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
