@@ -77,10 +77,10 @@ public class SubredditResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addSubreddit(@HeaderParam("creatorId") long creatorId,
+    public Response addSubreddit(@HeaderParam("userName") String userName,
                                  @HeaderParam("name") String name,
-                                 @HeaderParam("moderators") List<String> moderators) {
-        return Response.ok(subredditService.addSubreddit(profileService.getProfileById(creatorId), name)).build();
+                                 @HeaderParam("rules") String rules){
+        return Response.ok(subredditService.addSubreddit(profileService.getProfileByName(userName), name, rules)).build();
     }
 
 

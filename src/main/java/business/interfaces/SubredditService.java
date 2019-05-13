@@ -3,13 +3,12 @@ package business.interfaces;
 import domain.Profile;
 import domain.Subreddit;
 
-import javax.ws.rs.core.UriBuilder;
 import java.util.List;
 
 public interface SubredditService {
     List<Subreddit> getAllSubreddits();
 
-    Subreddit addSubreddit(Profile profile, String name);
+    Subreddit addSubreddit(Profile profile, String name, String rules);
 
     Subreddit getSubredditByName(String name);
 

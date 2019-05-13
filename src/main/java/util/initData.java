@@ -45,7 +45,7 @@ public class initData {
     }
 
     private void initSubreddits(){
-        subredditService.addSubreddit(profileService.getProfileByName("henk"), "henkssub");
+        subredditService.addSubreddit(profileService.getProfileByName("henk"), "henkssub", "just have fun, LOL");
     }
 
     private void initPosts(){

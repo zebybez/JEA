@@ -34,10 +34,11 @@ public class SubredditService implements business.interfaces.SubredditService {
     }
 
     @Override
-    public Subreddit addSubreddit(Profile profile, String name) {
+    public Subreddit addSubreddit(Profile profile, String name, String rules) {
         Subreddit subreddit = new Subreddit();
         subreddit.setName(name);
         subreddit.setCreator(profile);
+        subreddit.setRules(rules);
         return subredditDao.persist(subreddit);
     }
 
