@@ -16,7 +16,7 @@ public class CorsFilter implements ContainerResponseFilter {
         responseContext.getHeaders().add(
                 "Access-Control-Allow-Credentials", "true");
         responseContext.getHeaders().add(
-                "Access-Control-Allow-Headers", "email, password, token, name, subreddit, responseType, rules, username");
+                "Access-Control-Allow-Headers", "email, password, token, name, subreddit, responseType, rules, username, isNSFW, content, title, authorization");
         responseContext.getHeaders().add(
                 "Access-Control-Allow-Methods",
                 "GET, POST, PUT, DELETE, OPTIONS, HEAD");
