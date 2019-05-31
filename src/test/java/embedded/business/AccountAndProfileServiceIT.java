@@ -79,6 +79,7 @@ public class AccountAndProfileServiceIT {
                 .addClass(Payload.class)
                 .addClass(JWTHelper.class)
                 .addClass(Constants.class)
+                .addClass(RoleType.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsLibraries(files);
