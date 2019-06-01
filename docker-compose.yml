@@ -16,8 +16,8 @@ services:
       - "8083:8080"
       - "50000:50000"
     volumes:
-      - devDeployment:/devDeployment
-      - masterDeployment:/masterDeployment
+      - devDeployment:/var/jenkins_home/devDeployment
+      - masterDeployment:/var/jenkins_home/masterDeployment
       - jenkins_home:/var/jenkins_home
   sonarqube:
     image: sonarqube
