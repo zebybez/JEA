@@ -22,7 +22,7 @@ dependencies {
     compile 'com.sun.faces:jsf-api:2.2.18'
     compile 'com.sun.faces:jsf-impl:2.2.18'
     
-    testCompile module (':main')
+    testCompile project (':main')
    
     providedCompile 'javax:javaee-api:8.0.1-b5'
     
