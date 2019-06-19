@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 volumes:
   jenkins_home:
@@ -10,42 +10,60 @@ volumes:
   psqlMasterConfig:
 
 services:
+#JENKINS
   jenkins:
     image: jenkins/jenkins
     ports:
       - "8083:8080"
       - "50000:50000"
     volumes:
-      - devDeployment:/var/jenkins_home/devDeployment
-      - masterDeployment:/var/jenkins_home/masterDeployment
+      - devDeployment:/devDeployment
+      - masterDeployment:/masterDeployment
       - jenkins_home:/var/jenkins_home
+
+#ANALYSIS TOOLS
+  #Sonar
   sonarqube:
     image: sonarqube
     ports:
       - "9000:9000"
+
+#APPLICATION SERVERS
   wildflyDev:
-    image: jboss/wildfly
+    image: wildfly-admin
     ports:
       - "8081:8080"
+      - "9991:9990"
     volumes:
       - devDeployment:/opt/jboss/wildfly/standalone/deployments
       - devConfig:/opt/jboss/wildfly/standalone/configuration
+    links:
+      - postgresDev:database
   wildflyMaster:
-    image: jboss/wildfly
+    image: wildfly-admin
     ports:
       - "8082:8080"
+      - "9992:9990"
     volumes:
       - masterDeployment:/opt/jboss/wildfly/standalone/deployments
       - masterConfig:/opt/jboss/wildfly/standalone/configuration
+    links:
+      - postgresMaster:database
+
+#DATABASES
   postgresMaster:
     image: postgres
     ports:
       - "5433:5432"
     volumes:
       - psqlMasterConfig:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
   postgresDev:
     image: postgres
     ports:
       - "5434:5432"
     volumes:
       - psqlDevConfig:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
