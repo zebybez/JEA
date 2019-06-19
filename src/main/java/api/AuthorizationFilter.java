@@ -4,7 +4,7 @@ package api;
 import business.interfaces.AccountService;
 import domain.Account;
 import util.annotations.Secured;
-import util.security.Role;
+import util.security.RoleType;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -40,8 +40,8 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
-        List<Role> classRoles = extractRoles(resourceInfo.getResourceClass());
-        List<Role> methodRoles = extractRoles(resourceInfo.getResourceMethod());
+        List<RoleType> classRoles = extractRoles(resourceInfo.getResourceClass());
+        List<RoleType> methodRoles = extractRoles(resourceInfo.getResourceMethod());
 
         profileName = securityContext.getUserPrincipal().getName();
 
@@ -58,28 +58,29 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         }
     }
 
-    private List<Role> extractRoles(AnnotatedElement annotatedElement) {
+    private List<RoleType> extractRoles(AnnotatedElement annotatedElement) {
         if (annotatedElement == null) {
-            return new ArrayList<Role>();
+            return new ArrayList<RoleType>();
         } else {
             Secured secured = annotatedElement.getAnnotation(Secured.class);
             if (secured == null) {
-                return new ArrayList<Role>();
+                return new ArrayList<RoleType>();
             } else {
-                Role[] allowedRoles = secured.value();
+                RoleType[] allowedRoles = secured.value();
                 return Arrays.asList(allowedRoles);
             }
         }
     }
 
-    private void checkPermissions(List<Role> allowedRoles) throws SecurityException {
+    private void checkPermissions(List<RoleType> allowedRoles) throws SecurityException {
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
         if(allowedRoles.isEmpty()){
             return;
         }
         Account account = accountService.getAccountByProfileName(profileName);
-        if(!allowedRoles.contains(account.getRole())){
+        System.out.println("checking user role");
+        if(!allowedRoles.contains(RoleType.valueOf(account.getRole().getName()))){
             throw new SecurityException("user not in role");
         }
     }

@@ -20,9 +20,7 @@ public class SubredditResource {
     ProfileService profileService;
 
     @Inject
-    public ProfileService getProfileService() {
-        return profileService;
-    }
+    public void setProfileService(ProfileService profileService){this.profileService = profileService;}
 
     @Inject
     public void setSubredditService(SubredditService subredditService) {
@@ -71,17 +69,18 @@ public class SubredditResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response editSubreddit(@HeaderParam("name") String name,
-                                  @HeaderParam("rules") String rules,
-                                  @HeaderParam("moderators") List<String> moderators) {
-        return Response.ok(subredditService.editSubreddit(name, rules, moderators)).build();
+                                  @HeaderParam("rules") String rules) {
+        // todo check if the user owns the subreddit
+        return Response.ok(subredditService.editSubreddit(name, rules)).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addSubreddit(@HeaderParam("creatorId") long creatorId,
+    public Response addSubreddit(@HeaderParam("username") String userName,
                                  @HeaderParam("name") String name,
-                                 @HeaderParam("moderators") List<String> moderators) {
-        return Response.ok(subredditService.addSubreddit(profileService.getProfileById(creatorId), name)).build();
+                                 @HeaderParam("rules") String rules){
+        // todo check if the user is actually him
+        return Response.ok(subredditService.addSubreddit(profileService.getProfileByName(userName), name, rules)).build();
     }
 
 

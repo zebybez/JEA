@@ -8,14 +8,22 @@ import java.io.Serializable;
 public class Payload implements Serializable {
     private String email;
     private String name;
-    private String ProfileUuid;
-    private Role Role;
+    private String profileUuid;
+    private String roleName;
 
-    public Payload(String email, String name, String profileUuid, Role role) {
+    public Payload(String email, String name, String profileUuid, String roleName) {
         this.email = email;
-        ProfileUuid = profileUuid;
-        Role = role;
+        this.profileUuid = profileUuid;
         this.name = name;
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getName() {
@@ -35,18 +43,10 @@ public class Payload implements Serializable {
     }
 
     public String getProfileUuid() {
-        return ProfileUuid;
+        return profileUuid;
     }
 
     public void setProfileUuid(String profileUuid) {
-        ProfileUuid = profileUuid;
-    }
-
-    public Role getRole() {
-        return Role;
-    }
-
-    public void setRole(Role role) {
-        Role = role;
+        this.profileUuid = profileUuid;
     }
 }

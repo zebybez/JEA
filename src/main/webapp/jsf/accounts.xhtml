@@ -39,7 +39,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name = "header">Role</f:facet>
-                    <h:outputLabel value ="#{account.role}"/>
+                    <h:outputLabel value ="#{account.role.name}"/>
                 </h:column>
                 <h:column>
                     <h:commandLink class="btn btn-danger" value="Remove" action="#{accountBean.removeAccount(account)}">
@@ -47,10 +47,10 @@
                     </h:commandLink>
                 </h:column>
                 <h:column>
-                    <h:commandLink rendered="#{account.role != 'Admin'}" class="btn btn-danger" value="Make Admin" action="#{accountBean.makeAdmin(account)}">
+                    <h:commandLink rendered="#{account.role.name != 'Admin'}" class="btn btn-danger" value="Make Admin" action="#{accountBean.makeAdmin(account)}">
                         <f:ajax event="action" render="accounts"/>
                     </h:commandLink>
-                    <h:commandLink rendered="#{account.role != 'Regular'}" class="btn btn-danger" value="Revoke Admin" action="#{accountBean.revokeAdmin(account)}">
+                    <h:commandLink rendered="#{account.role.name != 'Regular'}" class="btn btn-danger" value="Revoke Admin" action="#{accountBean.revokeAdmin(account)}">
                         <f:ajax event="action" render="accounts"/>
                     </h:commandLink>
                 </h:column>

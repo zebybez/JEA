@@ -1,4 +1,4 @@
-package DTO;
+package domain.DTO;
 
 public class AccountDTO {
     private String email;

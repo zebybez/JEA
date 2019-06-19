@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Post implements Judgeable {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -86,7 +86,7 @@ public class Post implements Judgeable {
         isNSFW = NSFW;
     }
 
-    @Override
+
     public int getUpvotes() {
         return upvotes;
     }
@@ -95,7 +95,7 @@ public class Post implements Judgeable {
         this.upvotes = upvotes;
     }
 
-    @Override
+
     public int getDownvotes() {
         return downvotes;
     }
@@ -104,7 +104,7 @@ public class Post implements Judgeable {
         this.downvotes = downvotes;
     }
 
-    @Override
+
     public Profile getCreator() {
         return creator;
     }
@@ -113,7 +113,7 @@ public class Post implements Judgeable {
         this.creator = creator;
     }
 
-    @Override
+
     public int getScore() {
         return 0;
     }

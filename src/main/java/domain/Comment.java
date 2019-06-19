@@ -21,6 +21,15 @@ public class Comment implements Judgeable {
     private Comment replyTo;
     @OneToMany(mappedBy = "replyTo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> replies;
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public Comment() {
 

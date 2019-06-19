@@ -32,7 +32,7 @@ public class PostResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSingle(@PathParam("id") long id){
         try{
@@ -43,7 +43,7 @@ public class PostResource {
     }
 
     @GET
-    @Path("sub/{subreddit}")
+    @Path("/sub/{subreddit}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPostsInSubreddit(@PathParam("subreddit") String subreddit){
         try{
@@ -55,7 +55,7 @@ public class PostResource {
 
     @Secured
     @GET
-    @Path("user/{userName}")
+    @Path("/user/{userName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPostsByUser(@PathParam("userName") String userName){
         try{

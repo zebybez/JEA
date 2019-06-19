@@ -2,7 +2,7 @@ package api.resource;
 
 import business.interfaces.AccountService;
 import util.annotations.Secured;
-import util.security.Role;
+import util.security.RoleType;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Secured({Role.Admin})
+@Secured({RoleType.Admin})
 @Path("/accounts")
 public class AccountResource {
 

@@ -1,6 +1,6 @@
 package util.annotations;
 
-import util.security.Role;
+import util.security.RoleType;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;
@@ -14,5 +14,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 public @interface Secured {
-    Role[] value() default {};
+    RoleType[] value() default {};
 }

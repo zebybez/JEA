@@ -4,7 +4,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import util.annotations.Secured;
 import util.security.JWTHelper;
-import util.security.Role;
+import util.security.RoleType;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
@@ -52,7 +52,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
                 @Override
                 public boolean isUserInRole(String role) {
-                    Role userRole = (Role) userMap.get("role");
+                    RoleType userRole = (RoleType) userMap.get("role");
                     if(userRole.toString() == role){
                         return true;
                     }

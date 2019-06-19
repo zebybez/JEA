@@ -56,21 +56,24 @@ public class PostService implements business.interfaces.PostService {
 
     @Override
     public List<Post> getPostsByUser(String userName) {
-        return null;
+        return profileService.getProfileByName(userName).getPosts();
     }
 
     @Override
     public List<Post> getPostsInSubreddit(String subreddit) {
-        return null;
+        //return subredditService.getSubredditByName(subreddit).getPosts();
+        return postDao.getAllInSubreddit(subreddit);
     }
 
     @Override
     public Post deletePost(long id) {
-        return null;
+        Post post = postDao.find(id);
+        postDao.delete(post);
+        return post;
     }
 
     @Override
     public Post getPost(long id) {
-        return null;
+        return postDao.find(id);
     }
 }

@@ -1,6 +1,8 @@
 package api.resource;
 
 import business.interfaces.AccountService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -25,12 +27,13 @@ public class AuthResource {
 
     @POST
     @Path("/login")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(@HeaderParam("email") String email,
                           @HeaderParam("password") String password) {
+        Gson gson = new Gson();
         try {
             String jws = accountService.login(email, password);
-            return Response.ok(jws).build();
+            return Response.ok(gson.toJson(jws)).build();
         } catch (SecurityException e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (NoResultException e) {

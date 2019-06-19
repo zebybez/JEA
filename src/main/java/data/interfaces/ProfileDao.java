@@ -1,6 +1,7 @@
 package data.interfaces;
 
 import domain.Profile;
+import domain.Subreddit;
 
 import java.util.List;
 

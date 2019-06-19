@@ -1,9 +1,9 @@
 package business;
 
+import data.interfaces.ProfileDao;
 import data.interfaces.SubredditDao;
 import domain.Profile;
 import domain.Subreddit;
-import business.interfaces.ProfileService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Context;
@@ -13,11 +13,11 @@ import java.util.List;
 @Stateless
 public class SubredditService implements business.interfaces.SubredditService {
     private SubredditDao subredditDao;
-    private ProfileService profileService;
+    private ProfileDao profileDao;
 
     @Inject
-    public void setProfileService(ProfileService profileService) {
-        this.profileService = profileService;
+    public void setProfileDao(ProfileDao profileDao) {
+        this.profileDao = profileDao;
     }
 
     @Context
@@ -34,10 +34,11 @@ public class SubredditService implements business.interfaces.SubredditService {
     }
 
     @Override
-    public Subreddit addSubreddit(Profile profile, String name) {
+    public Subreddit addSubreddit(Profile profile, String name, String rules) {
         Subreddit subreddit = new Subreddit();
         subreddit.setName(name);
         subreddit.setCreator(profile);
+        subreddit.setRules(rules);
         return subredditDao.persist(subreddit);
     }
 
@@ -48,16 +49,18 @@ public class SubredditService implements business.interfaces.SubredditService {
 
     @Override
     public List<Subreddit> getSubscriptionsForUser(String userName) {
-        return null;
+        return profileDao.getProfileByName(userName).getSubscriberOf();
     }
 
     @Override
     public List<Subreddit> getModeratedSubs(String userName) {
-        return null;
+         return profileDao.getProfileByName(userName).getModeratorOf();
     }
 
     @Override
-    public Subreddit editSubreddit(String name, String rules, List<String> moderators) {
-        return null;
+    public Subreddit editSubreddit(String name, String rules) {
+        Subreddit subreddit = subredditDao.findByName(name);
+        subreddit.setRules(rules);
+        return subredditDao.persist(subreddit);
     }
 }

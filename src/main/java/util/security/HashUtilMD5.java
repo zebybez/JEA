@@ -36,6 +36,16 @@ public class HashUtilMD5 implements HashUtil {
         }
 
     }
+    @Override
+    public String hashString(String toHash) {
+        try{
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            return new String(messageDigest.digest(toHash.getBytes()));
+        } catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+            return "";
+        }
 
+    }
 
 }
