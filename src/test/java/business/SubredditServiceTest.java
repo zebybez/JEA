@@ -31,7 +31,7 @@ public class SubredditServiceTest {
 
     @Test
     public void addSubreddit() {
-        assertTrue(true);
+        assertFalse(false);
     }
 
     @Test
