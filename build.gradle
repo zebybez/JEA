@@ -10,6 +10,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {url 'http://repo.gradle.org/gradle/libs-releases-local'}
 }
 
 ext.libraryVersions = [
@@ -23,8 +24,6 @@ dependencies {
     compile 'com.sun.faces:jsf-api:2.2.18'
     compile 'com.sun.faces:jsf-impl:2.2.18'
     
-    testCompile project (':main')
-   
     providedCompile 'javax:javaee-api:8.0.1-b5'
     
     testCompile 'io.rest-assured:rest-assured:3.3.0'
@@ -34,7 +33,8 @@ dependencies {
     testCompile "org.jboss.arquillian:arquillian-bom:${libraryVersions.arquillian}"
     testCompile "org.jboss.arquillian.junit:arquillian-junit-container:${libraryVersions.arquillian}"
     testCompile "org.jboss.arquillian.protocol:arquillian-protocol-servlet:${libraryVersions.arquillian}"
-    testCompile "org.wildfly.arquillian:wildfly-arquillian-container-managed:${libraryVersions.wildfly}"
+    testCompile "org.wildfly.arquillian:wildfly-arquillian-container-managed:2.2.0.Final"
+    testCompile "org.gradle:gradle-tooling-api:5.4.1"
     testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:${libraryVersions.shrinkWrapResolverGradle}"
     testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:${libraryVersions.shrinkWrapResolverGradle}"
     testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:${libraryVersions.shrinkWrapResolverGradle}" 

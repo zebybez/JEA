@@ -86,6 +86,7 @@ public class ProfileResourceIT {
                 .addClass(AuthenticationFilter.class)
                 .addClass(AuthorizationFilter.class)
                 .addClass(JAXRSConfig.class)
+                .addClass(RoleType.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsLibraries(files);
@@ -122,7 +123,7 @@ public class ProfileResourceIT {
 
     @Test
     public void getList(){
-        when().get("/profiles"); //todo
+       // when().get("/profiles"); //todo
     }
 
     @Test
