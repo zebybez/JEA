@@ -15,8 +15,8 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:database://localhost:5432/test" /> <!-- BD Mane -->
-            <property name="javax.persistence.jdbc.user" value="test" /> <!-- DB User -->
-            <property name="javax.persistence.jdbc.password" value="test" /> <!-- DB Password -->
+            <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="postgres" /> <!-- DB Password -->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop" /> <!-- create / create-drop / update -->
